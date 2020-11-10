@@ -1,4 +1,4 @@
-import 'package:appodeal_flutter/appodeal_flutter.dart';
+//import 'package:appodeal_flutter/appodeal_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
@@ -19,15 +19,15 @@ void main() {
     DeviceOrientation.portraitDown,
   ]);
 
-  setupAppoDeal();
+  // setupAppoDeal();
   setup();
   runApp(MyApp());
 }
 
 setupAppoDeal() {
+  /*
   Appodeal.setAppKeys(
     androidAppKey: 'e497c4e4d4d1834fde018c5c22e542df9a4d6f889d0432c4',
-    iosAppKey: '<your-appodeal-ios-key>',
   );
   Appodeal.initialize(
       hasConsent: true,
@@ -37,6 +37,7 @@ setupAppoDeal() {
         AdType.REWARD,
       ],
       testMode: true);
+      */
 }
 
 void setup() {

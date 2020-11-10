@@ -34,7 +34,7 @@ dependencies:
   get_it: ^5.0.1
   shared_preferences: ^0.5.12+4
   fluttertoast: ^7.1.1
-  appodeal_flutter: ^0.3.2
+  #appodeal_flutter: ^0.3.2
   
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

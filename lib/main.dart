@@ -25,19 +25,17 @@ void main() {
 }
 
 setupAppoDeal() {
-  /*
-  Appodeal.setAppKeys(
-    androidAppKey: 'e497c4e4d4d1834fde018c5c22e542df9a4d6f889d0432c4',
-  );
-  Appodeal.initialize(
-      hasConsent: true,
-      adTypes: [
-        AdType.BANNER,
-        AdType.INTERSTITIAL,
-        AdType.REWARD,
-      ],
-      testMode: true);
-      */
+  // Appodeal.setAppKeys(
+  //   androidAppKey: 'e497c4e4d4d1834fde018c5c22e542df9a4d6f889d0432c4',
+  // );
+  // Appodeal.initialize(
+  //     hasConsent: true,
+  //     adTypes: [
+  //       AdType.BANNER,
+  //       AdType.INTERSTITIAL,
+  //       AdType.REWARD,
+  //     ],
+  //     testMode: true);
 }
 
 void setup() {

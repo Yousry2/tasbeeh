@@ -1,8 +1,12 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:measured_size/measured_size.dart';
 import 'package:misbaha_app/ui/control_panel/control_buttons_widget.dart';
 import 'package:misbaha_app/ui/control_panel/speed_slider_widget.dart';
 import 'package:misbaha_app/ui/control_panel/vibration_slider_widget.dart';
+import 'package:misbaha_app/utils/admob_flutter_service_.dart';
 import 'package:provider/provider.dart';
 
 import './control_button.dart';
@@ -24,6 +28,7 @@ class _ControlPanelWidgetState extends State<ControlPanelWidget>
   Animation opacityAnimation;
   AppProvider appProvider;
   TasbihDailyListProvider tasbihDailyListProvider;
+  Size adAvaliableSize = Size.zero;
 
   @override
   void dispose() {
@@ -56,7 +61,7 @@ class _ControlPanelWidgetState extends State<ControlPanelWidget>
   @override
   Widget build(BuildContext context) {
     AppProvider appProvider = Provider.of<AppProvider>(context);
-
+    AdsService adsService = GetIt.I.get<AdsService>();
     appProvider.addListener(() async {
       if (appProvider.countProcessStarted) {
         countProcessStarted1 = await Helper.setValueAfterDelay(
@@ -84,32 +89,21 @@ class _ControlPanelWidgetState extends State<ControlPanelWidget>
         setState(() {});
       }
     });
-    return AnimatedPositioned(
-      duration: Duration(
-        milliseconds: 800,
-      ),
-      curve: Curves.easeInOut,
-      width: MediaQuery.of(context).size.width,
-      top: MediaQuery.of(context).size.height *
-          (countProcessStarted8 ? 0.04 : 0.25),
-      child: Stack(
-        ///= alignment: Alignment.bottomCenter,
-        children: <Widget>[
-          Container(
-            child: !countProcessStarted10
-                ? null
-                : FadeTransition(
-                    opacity: opacityAnimation,
-                    child: BackButton(
-                      color: CustomTheme.color1,
-                    ),
-                  ),
+    return Stack(
+      ///= alignment: Alignment.bottomCenter,
+      children: <Widget>[
+        AnimatedPositioned(
+          duration: Duration(
+            milliseconds: 800,
           ),
-
-          Positioned(
-            left: MediaQuery.of(context).size.width / 2 - (172 / 2) - 8,
+          curve: Curves.easeInOut,
+          width: MediaQuery.of(context).size.width,
+          top: MediaQuery.of(context).size.height *
+              (countProcessStarted8 ? 0.04 : 0.25),
+          //  left: MediaQuery.of(context).size.width / 2 - (172 / 2) - 8,
+          child: Center(
             child: Container(
-              width: 172 + 18.0,
+              width: CustomTheme.CircleWidgetHeight,
               child: Stack(
                 children: <Widget>[
                   CircleButtonWidget(),
@@ -149,7 +143,7 @@ class _ControlPanelWidgetState extends State<ControlPanelWidget>
                           // ),
                           onTap: () {
                             Provider.of<AppProvider>(context, listen: false)
-                                .toggleCountProcess();
+                                .startCountProcess();
                           },
                         ),
                       ),
@@ -159,27 +153,66 @@ class _ControlPanelWidgetState extends State<ControlPanelWidget>
               ),
             ),
           ),
+        ),
 
-          //),
-          Container(
-            height: 400,
-            padding: EdgeInsets.only(bottom: 0, left: 20, right: 20),
-            child: !countProcessStarted10
-                ? null
-                : FadeTransition(
-                    opacity: opacityAnimation,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        ControlButtonsWidget(),
-                        SpeedSliderWidget(),
-                        VibrationSliderWidget(),
-                      ],
-                    ),
+        //),
+
+        Container(
+          padding: EdgeInsets.only(bottom: 0, left: 20, right: 20),
+          child: !countProcessStarted10
+              ? null
+              : FadeTransition(
+                  opacity: opacityAnimation,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(top: 20),
+                        alignment: Alignment.topLeft,
+                        child: !countProcessStarted10
+                            ? null
+                            : FadeTransition(
+                                opacity: opacityAnimation,
+                                child: BackButton(
+                                  color: CustomTheme.color1,
+                                ),
+                              ),
+                      ),
+                      Container(
+                        height: CustomTheme.CircleWidgetHeight - 20,
+                      ),
+                      ControlButtonsWidget(),
+                      Container(
+                        margin: EdgeInsets.only(top: 15, bottom: 15),
+                        child: SpeedSliderWidget(),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(bottom: 15),
+                        child: VibrationSliderWidget(),
+                      ),
+                      MeasuredSize(
+                        onChange: (Size size) {
+                          setState(() {
+                            adAvaliableSize = size;
+                            print("SSSSSSSSSSSSSSIE ${size.height}");
+                          });
+                        },
+                        child: Expanded(
+                          child: adAvaliableSize?.height >=
+                                  adsService.banner2Size.height
+                              ? AdmobBanner(
+                                  adUnitId: adsService.getBanner2AdUnitId(),
+                                  adSize: adsService.banner2Size)
+                              : AdmobBanner(
+                                  adUnitId: adsService.getBanner2AdUnitId(),
+                                  adSize: adsService.bannerSize),
+                        ),
+                      ),
+                    ],
                   ),
-          ),
-        ],
-      ),
+                ),
+        ),
+      ],
     );
   }
 }

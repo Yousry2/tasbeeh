@@ -17,9 +17,7 @@ class _CircleButtonWidgetState extends State<CircleButtonWidget> {
     return
         //AnimatedBuilder(animation: null,builder: (context, child)=>
         GestureDetector(
-      onTap: () {
-        Provider.of<AppProvider>(context, listen: false).toggleCountProcess();
-      },
+      onTap: () {},
       child: Column(
         children: <Widget>[
           Stack(

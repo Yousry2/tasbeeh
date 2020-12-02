@@ -1,7 +1,10 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:misbaha_app/providers/db_provider.dart';
 import 'package:misbaha_app/providers/tick_provider.dart';
 import 'package:misbaha_app/ui/control_panel/vibration_slider_widget.dart';
+import 'package:misbaha_app/utils/admob_flutter_service_.dart';
 import 'package:provider/provider.dart';
 
 import 'custom_theme.dart';
@@ -18,6 +21,8 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
+    AdsService adsService = GetIt.I.get<AdsService>();
+
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(
@@ -33,8 +38,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
-                  VibrationSliderWidget(),
+                  Container(
+                      margin: EdgeInsets.symmetric(vertical: 20),
+                      child: VibrationSliderWidget()),
                   Expanded(child: CurrentTasbihList()),
+                  AdmobBanner(
+                    adUnitId: adsService.getBanner2AdUnitId(),
+                    adSize: adsService.banner2Size,
+                  ),
                 ],
               ),
             ),

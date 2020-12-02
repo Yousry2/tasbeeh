@@ -185,7 +185,7 @@ class _CurrentTasbihListState extends State<CurrentTasbihList> {
                 builder: (context, tasbihDailyListProvider, ch) => Container(
                   // constraints:
                   //     BoxConstraints(maxHeight: constraints.maxHeight * 1),
-                  height: constraints.maxHeight * .85,
+                  height: constraints.maxHeight * .80,
                   // width: MediaQuery.of(context).size.width * .85,
                   child: tasbihDailyListProvider.userTasbihList == null
                       ? null

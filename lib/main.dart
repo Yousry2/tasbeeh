@@ -1,4 +1,5 @@
 //import 'package:appodeal_flutter/appodeal_flutter.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
@@ -9,6 +10,8 @@ import 'package:misbaha_app/providers/tick_provider.dart';
 import 'package:misbaha_app/services/db_service.dart';
 import 'package:misbaha_app/services/vibration_service.dart';
 import 'package:misbaha_app/settings.dart';
+import 'package:misbaha_app/utils/admob_flutter_service_.dart';
+import 'package:misbaha_app/utils/ads_service.dart';
 import 'package:provider/provider.dart';
 import 'home.dart';
 
@@ -19,29 +22,22 @@ void main() {
     DeviceOrientation.portraitDown,
   ]);
 
-  // setupAppoDeal();
   setup();
+  setupAds();
   runApp(MyApp());
 }
 
-setupAppoDeal() {
-  // Appodeal.setAppKeys(
-  //   androidAppKey: 'e497c4e4d4d1834fde018c5c22e542df9a4d6f889d0432c4',
-  // );
-  // Appodeal.initialize(
-  //     hasConsent: true,
-  //     adTypes: [
-  //       AdType.BANNER,
-  //       AdType.INTERSTITIAL,
-  //       AdType.REWARD,
-  //     ],
-  //     testMode: true);
+setupAds() {
+  AdsService adsService = GetIt.I.get<AdsService>();
+  adsService.initializeAds();
+  // adsService.showBanner1();
 }
 
 void setup() {
   final getIt = GetIt.instance;
   getIt.registerSingleton<DBService>(DBService());
   getIt.registerSingleton<VibrationService>(VibrationService());
+  getIt.registerSingleton<AdsService>(AdsService());
 }
 
 class MyApp extends StatelessWidget {

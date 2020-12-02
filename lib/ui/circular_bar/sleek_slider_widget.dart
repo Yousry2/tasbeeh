@@ -28,7 +28,7 @@ class _SleekButtonWidgetState extends State<SleekButtonWidget> {
   _customWidth01(bool countingModeStarted) {
     return countingModeStarted
         ? CustomSliderWidths(
-            trackWidth: 2, progressBarWidth: 12, shadowWidth: 30)
+            trackWidth: 2, progressBarWidth: 10, shadowWidth: 20)
         : CustomSliderWidths(
             trackWidth: 2, progressBarWidth: 10, shadowWidth: 20);
   }
@@ -61,7 +61,7 @@ class _SleekButtonWidgetState extends State<SleekButtonWidget> {
       infoProperties: getInforProperties(tasbih),
       startAngle: 120,
       angleRange: 300,
-      size: 172,
+      size: CustomTheme.CircleWidgetHeight,
     );
     //  MediaQuery.of(context).size.height * .25);
   }

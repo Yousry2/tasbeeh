@@ -37,10 +37,11 @@ class AdsService {
     // Initialize without device test ids.
     Admob.initialize();
 
-    // Admob.initialize(testDeviceIds: [
-    //   '9DB7681BC24B9D460CFE6F7E08A5B76C',
-    //   'A89A2059D8EBCE74A6D2E02A208890D4'
-    // ]);
+    Admob.initialize(testDeviceIds: [
+      '9DB7681BC24B9D460CFE6F7E08A5B76C',
+      'A89A2059D8EBCE74A6D2E02A208890D4',
+      '43240C235BA5735BB18466DD67E01461'
+    ]);
     // Or add a list of test ids.
     if (Platform.isIOS) {
       Admob.requestTrackingAuthorization().then((value) => null);

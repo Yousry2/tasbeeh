@@ -40,21 +40,13 @@ class _SettingsScreenState extends State<SettingsScreen>
   }
 
   Widget expandedAd() => Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.red),
-        ),
         child: adAvaliableSize?.height >= adsService.banner4Size.height
-            ? Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white),
-                ),
-                child: AdmobBanner(
-                    adUnitId: adsService.getBanner4AdUnitId(),
-                    adSize: adsService.banner4Size,
-                    listener: (AdmobAdEvent event, Map<String, dynamic> args) {
-                      adsService.handleEvent(event, args, 'Banner');
-                    }),
-              )
+            ? AdmobBanner(
+                adUnitId: adsService.getBanner4AdUnitId(),
+                adSize: adsService.banner4Size,
+                listener: (AdmobAdEvent event, Map<String, dynamic> args) {
+                  adsService.handleEvent(event, args, 'Banner');
+                })
             : AdmobBanner(
                 adUnitId: adsService.getBanner5AdUnitId(),
                 adSize: adsService.banner5Size,
@@ -94,7 +86,7 @@ class _SettingsScreenState extends State<SettingsScreen>
                           ),
                         )
                       : Container(
-                          height: 200,
+                          height: 250,
                           // constraints: BoxConstraints(
                           //   minHeight: 300,
                           // ),

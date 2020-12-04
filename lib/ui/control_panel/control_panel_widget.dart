@@ -204,8 +204,8 @@ class _ControlPanelWidgetState extends State<ControlPanelWidget>
                                   adUnitId: adsService.getBanner2AdUnitId(),
                                   adSize: adsService.banner2Size)
                               : AdmobBanner(
-                                  adUnitId: adsService.getBanner2AdUnitId(),
-                                  adSize: adsService.bannerSize),
+                                  adUnitId: adsService.getBanner3AdUnitId(),
+                                  adSize: adsService.banner3Size),
                         ),
                       ),
                     ],

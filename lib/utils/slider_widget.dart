@@ -9,15 +9,18 @@ class SliderWidget extends StatelessWidget {
   final String title;
   final double min;
   final double max;
+  final int divisions;
   final Function valueChanged;
 
-  SliderWidget(
-      {this.sliderValue,
-      this.sliderValueMap,
-      this.title,
-      this.min,
-      this.max,
-      this.valueChanged});
+  SliderWidget({
+    this.sliderValue,
+    this.sliderValueMap,
+    this.title,
+    this.min,
+    this.max,
+    this.divisions = 9,
+    this.valueChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,6 @@ class SliderWidget extends StatelessWidget {
         top: 1,
         bottom: 1,
       ),
-      margin: EdgeInsets.only(top: 15),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -49,7 +51,7 @@ class SliderWidget extends StatelessWidget {
               },
               min: min,
               max: max,
-              divisions: 9,
+              divisions: divisions,
               label: "$sliderValue",
             ),
           ),

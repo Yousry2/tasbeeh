@@ -6,6 +6,7 @@ import 'package:misbaha_app/providers/db_provider.dart';
 import 'package:misbaha_app/providers/tick_provider.dart';
 import 'package:misbaha_app/services/db_service.dart';
 import 'package:misbaha_app/utils/admob_flutter_service_.dart';
+import 'package:misbaha_app/utils/helper.dart';
 import './custom_theme.dart';
 import './providers/app_provider.dart';
 import './providers/tasbih_daily_list_provider.dart';
@@ -51,10 +52,44 @@ Future<bool> _onWillPop(BuildContext ctx) async {
   }
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  AnimationController controller;
+  Animation opacityAnimation;
+  bool countProcessStarted1 = false;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+        vsync: this,
+        duration: Duration(
+          milliseconds: 200,
+        ));
+    opacityAnimation = Tween<double>(
+      begin: 1.0,
+      end: 0.0,
+    ).animate(CurvedAnimation(parent: controller, curve: Curves.easeIn));
+  }
+
   @override
   Widget build(BuildContext context) {
     AdsService adsService = GetIt.I.get<AdsService>();
+    AppProvider appProvider = Provider.of<AppProvider>(context);
+    appProvider.addListener(() async {
+      if (appProvider.countProcessStarted) {
+        countProcessStarted1 = await Helper.setValueAfterDelay(
+            countProcessStarted1, appProvider.countProcessStarted, 1200);
+        setState(() {
+          controller.forward();
+        });
+      } else {
+        countProcessStarted1 = await Helper.setValueAfterDelay(
+            countProcessStarted1, appProvider.countProcessStarted, 1200);
+        setState(() {
+          controller.reverse();
+        });
+      }
+    });
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Builder(
@@ -86,12 +121,20 @@ class _HomeState extends State<Home> {
                                   child: Container(
                                       margin:
                                           EdgeInsets.symmetric(horizontal: 26),
-                                      child: CurrentTasbihList()),
+                                      child: CurrentTasbihList(
+                                        addTasbihHeaderOptional: true,
+                                      )),
                                 ),
-                                AdmobBanner(
-                                  adUnitId: adsService.getBannerAdUnitId(),
-                                  adSize: adsService.bannerSize,
-                                ),
+                                countProcessStarted1
+                                    ? FittedBox()
+                                    : FadeTransition(
+                                        opacity: opacityAnimation,
+                                        child: AdmobBanner(
+                                          adUnitId:
+                                              adsService.getBannerAdUnitId(),
+                                          adSize: adsService.bannerSize,
+                                        ),
+                                      ),
                               ],
                             ),
                           ),

@@ -13,6 +13,12 @@ import '../../utils/helper.dart';
 class CurrentTasbihList extends StatefulWidget {
   @override
   _CurrentTasbihListState createState() => _CurrentTasbihListState();
+
+  final addTasbihHeaderOptional;
+
+  CurrentTasbihList({
+    this.addTasbihHeaderOptional = false,
+  });
 }
 
 class _CurrentTasbihListState extends State<CurrentTasbihList> {
@@ -153,7 +159,8 @@ class _CurrentTasbihListState extends State<CurrentTasbihList> {
         builder: (context, constraints) => Column(
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            constraints.maxHeight < CustomTheme.CompactDeviceListHeight
+            widget.addTasbihHeaderOptional &&
+                    constraints.maxHeight < CustomTheme.CompactDeviceListHeight
                 ? FittedBox()
                 : AnimatedOpacityWidget(
                     direction: Directions.bottom,
@@ -185,7 +192,7 @@ class _CurrentTasbihListState extends State<CurrentTasbihList> {
                 builder: (context, tasbihDailyListProvider, ch) => Container(
                   // constraints:
                   //     BoxConstraints(maxHeight: constraints.maxHeight * 1),
-                  height: constraints.maxHeight * .85,
+                  height: constraints.maxHeight * .80,
                   // width: MediaQuery.of(context).size.width * .85,
                   child: tasbihDailyListProvider.userTasbihList == null
                       ? null

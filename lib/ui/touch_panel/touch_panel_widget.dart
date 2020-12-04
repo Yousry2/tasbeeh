@@ -51,14 +51,14 @@ class _TouchPanelWidgetState extends State<TouchPanelWidget>
     print('i am there');
     if (await Vibration.hasVibrator()) {
       print('has vibrator');
-      Vibration.vibrate();
+     // Vibration.vibrate();
       if (await Vibration.hasAmplitudeControl()) {
         print('has amplitude');
-        Vibration.vibrate(amplitude: 128);
+     //   Vibration.vibrate(amplitude: 128);
       }
       if (await Vibration.hasCustomVibrationsSupport()) {
         print('has vibrationsupport');
-        Vibration.vibrate(intensities: [1, 255]);
+     //   Vibration.vibrate(intensities: [1, 255]);
       }
     }
   }

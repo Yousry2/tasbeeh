@@ -11,8 +11,6 @@ class VibrationService {
   }
 
   vibrate() {
-    print(vibrateIntensity);
-
     Vibration.vibrate(duration: vibrateIntensity);
     //Vibration.vibrate(duration: vibrateIntensity, intensities: [0, 100]);
   }

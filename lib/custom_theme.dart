@@ -101,6 +101,7 @@ class CustomTheme {
     fontWeight: FontWeight.bold,
   );
 
-  static const CompactDeviceHeaderHeight = 200;
-  static const CompactDeviceListHeight = 250;
+  static const double CompactDeviceHeaderHeight = 200;
+  static const double CompactDeviceListHeight = 250;
+  static const double CircleWidgetHeight = 172;
 }

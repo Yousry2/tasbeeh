@@ -26,16 +26,16 @@ class _VibrationSliderWidgetState extends State<VibrationSliderWidget>
   int sliderValue = 2;
 
   List<Map<String, int>> sliderValueMap = [
-    {'value': 1, 'countingSpeed': 10},
+    //   {'value': 1, 'countingSpeed': 10},
     {'value': 2, 'countingSpeed': 20},
     {'value': 3, 'countingSpeed': 30},
     {'value': 4, 'countingSpeed': 40},
     {'value': 5, 'countingSpeed': 60},
     {'value': 6, 'countingSpeed': 80},
-    {'value': 7, 'countingSpeed': 100},
-    {'value': 8, 'countingSpeed': 110},
-    {'value': 9, 'countingSpeed': 120},
-    {'value': 10, 'countingSpeed': 130},
+    // {'value': 7, 'countingSpeed': 100},
+    // {'value': 8, 'countingSpeed': 110},
+    // {'value': 9, 'countingSpeed': 120},
+    // {'value': 10, 'countingSpeed': 130},
   ];
 
   @override
@@ -50,8 +50,9 @@ class _VibrationSliderWidgetState extends State<VibrationSliderWidget>
         if (slidertmp != null) sliderValue = slidertmp['value'];
 
         return SliderWidget(
-          max: 10,
-          min: 1,
+          max: 6,
+          min: 2,
+          divisions: 4,
           title: 'Viberation Intensity : ',
           sliderValue: sliderValue.toDouble(),
           sliderValueMap: sliderValueMap,
